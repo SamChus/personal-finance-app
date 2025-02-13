@@ -43,6 +43,8 @@ export default {
           navy: "#626070",
           red: "#C94736",
           purple: "#826CB0",
+          dark: "#201F24",
+          gray: "#B3B3B3",
         },
         other: {
           purple: "#AF81BA",

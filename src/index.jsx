@@ -1,15 +1,21 @@
-import { div } from 'framer-motion/client'
-import React from 'react'
-import { Outlet } from 'react-router'
+import { div } from "framer-motion/client";
+import React from "react";
+import { Outlet } from "react-router";
+import MobileNav from "./components/MobileNav";
+import SideBar from "./components/SideBar";
 
 const Layout = () => {
-  
   return (
-    <div>
-      <h1>Layout</h1>
-      <Outlet />
+    <div className="flex flex-colw-full h-screen lg:flex-row">
+      <div className="">
+        <MobileNav />
+        <SideBar />
+      </div>
+      <div>
+        <Outlet />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

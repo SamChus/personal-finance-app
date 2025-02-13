@@ -41,45 +41,45 @@ import Overview from "../features/Overview";
 
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Layout />,
-        errorElement: <div>404 Not Found</div>,
-        children: [
-            {
-                path: "/overview",
-                element: <Overview />
-            },
-            {
-                path: "/budgets",
-                element: <Budgets />
-            },
-            {
-                path: "/transactions",
-                element: <Transactions />
-            },
-            {
-                path: "/pots",
-                element: <Pots />
-            },
-            {
-                path: "/recurring-bills",
-                element: <RecurringBills />
-            }
-        ]
-    },
-    {
-        path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/register",
-        element: <Register />
-    },
-    {
-        path: "*",
-        element: <div>404 Not Found</div>
-    }
-])
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <div>404 Not Found</div>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Overview />,
+      },
+      {
+        path: "/budgets",
+        element: <Budgets />,
+      },
+      {
+        path: "/transactions",
+        element: <Transactions />,
+      },
+      {
+        path: "/pots",
+        element: <Pots />,
+      },
+      {
+        path: "/recurring-bills",
+        element: <RecurringBills />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  // {
+  //     path: "*",
+  //     element: <div>404 Not Found</div>
+  // }
+]);
 
 export default router;
