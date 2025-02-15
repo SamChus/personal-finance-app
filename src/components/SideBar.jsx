@@ -103,10 +103,10 @@ const SideBar = () => {
       </div>
 
       {/* MENU */}
-      <nav className="w-full flex-grow">
+      <nav className="w-full">
         <ul className="flex flex-col gap-1 pr-6">
           {Nav_Link.map((link) => (
-            <NavLink key={link.id} link={link} isActive={isActive}  />
+            <NavLink key={link.id} link={link} isActive={isActive} />
           ))}
         </ul>
       </nav>
