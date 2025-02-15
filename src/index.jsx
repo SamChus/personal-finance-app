@@ -6,7 +6,7 @@ import SideBar from "./components/SideBar";
 
 const Layout = () => {
   return (
-    <div className="flex flex-colw-full h-screen lg:flex-row">
+    <div className="flex flex-colw-full h-screen lg:flex-row bg-beige-100">
       <div className="">
         <MobileNav />
         <SideBar />
