@@ -1,57 +1,64 @@
-import { motion, animate, AnimatePresence } from 'framer-motion';
-import React, { useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router';
-import { ArrowsDownUp, ChartDonut, House, Jar, Logo, Receipt, ShortLogo, ArrowFatLinesLeft } from "../assets/icons";
-import { cn } from '../utils/cn';
-
-
+import { motion, animate, AnimatePresence } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { Link, useLocation } from "react-router";
+import {
+  ArrowsDownUp,
+  ChartDonut,
+  House,
+  Jar,
+  Logo,
+  Receipt,
+  ShortLogo,
+  ArrowFatLinesLeft,
+} from "../assets/icons";
+import { cn } from "../utils/cn";
+import { useOnClickOutside } from "usehooks-ts";
 
 const SideBar = () => {
+  const [isActive, setIsActive] = useState(false);
 
-    const [isActive, setIsActive] = useState(false);
+  const ref = useRef(null);
 
-    const ref = useRef(null);
+  useOnClickOutside(ref, () => {
+    if (isActive) setIsActive(false);
+  });
 
-    const toggle = () => {
-        setIsActive(!isActive);
-    }
+  const toggle = () => {
+    setIsActive(!isActive);
+  };
 
-    
-
-
-
-        const Nav_Link = [
-          {
-            id: 1,
-            name: "Overview",
-            link: "/dashboard",
-            icon: <House />,
-          },
-          {
-            id: 2,
-            name: "Transactions",
-            link: "/transactions",
-            icon: <ArrowsDownUp />,
-          },
-          {
-            id: 3,
-            name: "Budgets",
-            link: "/budgets",
-            icon: <ChartDonut />,
-          },
-          {
-            id: 4,
-            name: "Pots",
-            link: "/pots",
-            icon: <Jar />,
-          },
-          {
-            id: 5,
-            name: "Recurring Bills",
-            link: "/recurring-bills",
-            icon: <Receipt />,
-          },
-        ];
+  const Nav_Link = [
+    {
+      id: 1,
+      name: "Overview",
+      link: "/dashboard",
+      icon: <House />,
+    },
+    {
+      id: 2,
+      name: "Transactions",
+      link: "/transactions",
+      icon: <ArrowsDownUp />,
+    },
+    {
+      id: 3,
+      name: "Budgets",
+      link: "/budgets",
+      icon: <ChartDonut />,
+    },
+    {
+      id: 4,
+      name: "Pots",
+      link: "/pots",
+      icon: <Jar />,
+    },
+    {
+      id: 5,
+      name: "Recurring Bills",
+      link: "/recurring-bills",
+      icon: <Receipt />,
+    },
+  ];
   return (
     <motion.div
       ref={ref}
@@ -99,12 +106,7 @@ const SideBar = () => {
       <nav className="w-full flex-grow">
         <ul className="flex flex-col gap-1 pr-6">
           {Nav_Link.map((link) => (
-            <NavLink
-              key={link.id}
-              name={link.name}
-              link={link.link}
-              icon={link.icon}
-            />
+            <NavLink key={link.id} link={link} isActive={isActive}  />
           ))}
         </ul>
       </nav>
@@ -134,28 +136,43 @@ const SideBar = () => {
       </motion.button>
     </motion.div>
   );
-}
+};
 
-export default SideBar
+export default SideBar;
 
+function NavLink({ link, isActive }) {
+  const location = useLocation();
 
-const NavLink = ({ link, icon }) => {
-  
-
-    const location = useLocation();
-
-    const isActive = location.pathname === link;
+  const isLinkActive = location.pathname === link.link;
 
   return (
-    <Link to={link} className="flex flex-col items-center text-gray-300">
-      <div
-        className={cn("w-[7rem] py-2 flex justify-center", {
-          "border-secondary-green border-l-4 bg-white text-secondary-green":
-            isActive,
+    <Link
+      to={link.link}
+      className={cn("group flex items-center gap-4 px-8 py-4", {
+        "rounded-r-lg border-l-4 border-secondary-green bg-white text-white":
+          isLinkActive && isActive,
+        "hover:bg-grey-800 hover:text-white": !isLinkActive,
+      })}
+    >
+      <span
+        className={cn("text-current", {
+          "text-secondary-green": isLinkActive,
         })}
       >
-        {icon}
-      </div>
+        {link.icon}
+      </span>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isActive ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className={cn("text-preset-3 truncate font-bold", {
+          "group-hover:text-white": !isLinkActive,
+          "text-grey-900": isLinkActive,
+          "text-grey-300": !isLinkActive,
+        })}
+      >
+        {link.name}
+      </motion.p>
     </Link>
   );
-};
+}
