@@ -67,7 +67,7 @@ const NavLink = ({link, icon}) => {
 
     return (
         <Link to={link} className='flex flex-col items-center text-gray-300'>
-            <div className={cn('w-[7rem] py-2 flex justify-center', {
+            <div className={cn('w-[6rem] py-2 flex justify-center', {
                 "border-secondary-green border-b-4 bg-white text-secondary-green rounded-t-[8px]": isActive
             })}>
             {icon}

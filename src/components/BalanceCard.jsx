@@ -1,18 +1,19 @@
-import React from 'react'
-import { useLocation } from 'react-router'
-import { cn } from '../utils/cn'
+import React from "react";
+import { cn } from "../utils/cn";
 
-
-
-const BalanceCard = ({title, amount, active}) => {
-
-
+const BalanceCard = ({ title, amount, active }) => {
   return (
-    <div className={cn('w-full p-4 col justify-between ml-1  rounded-[8px]', active ? 'bg-black' : 'bg-beige-100')}>
-        <h2 className={cn('text-sm font-semibold flex', active ? 'text-beige-100' : 'text-gray-500')}>{title}</h2>
-        <p className={cn('text-2xl font-bold mt-5', active ? 'text-white' : 'text-black')}>${amount}</p>
+    <div className={cn("w-full rounded-lg p-5 md:p-6", active ? "bg-black" : "bg-white")}>
+      <div className="flex flex-col gap-3">
+        <p className={cn("text-preset-4 font-normal", active ? "text-white" : "text-black")}>
+          {title}
+        </p>
+        <h4 className={cn("text-preset-1 font-bold", active ? "text-white" : "text-black")}>
+          ${amount}
+        </h4>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default BalanceCard
+export default BalanceCard;

@@ -3,24 +3,16 @@ import React from "react";
 import { Outlet } from "react-router";
 import MobileNav from "./components/MobileNav";
 import SideBar from "./components/SideBar";
-import BalanceCard from './components/BalanceCard'
-
 
 const Layout = () => {
   return (
-    <div className="flex flex-colw-full h-screen lg:flex-row bg-beige-100">
-      <div className="">
-        <MobileNav />
-        <SideBar />
-      </div>
-      <div>
+    <div className="flex w-full h-screen">
+      <MobileNav />
+      <SideBar />
+
+      <div className="flex-1 px-4 py-6 md:px-10 md:py-8  overflow-scroll bg-beige-100">
         <Outlet />
       </div>
-      <div className="flex flex-col lg:flex-row flex-grow h-24 mt-2 gap-4">  
-            <BalanceCard title={"Current Balance"} amount={"0.00"} active={true}/>
-            <BalanceCard title={"Current Balance"} amount={"0.00"} />
-            <BalanceCard title={"Current Balance"} amount={"0.00"} />
-          </div>
     </div>
   );
 };
