@@ -91,3 +91,17 @@ body {
     @apply text-xs leading-[150%] font-normal;
   }
 }
+
+@layer utilities{
+  .custom-date::-webkit-datetime-edit,
+  .custom-date::-webkit-clear-button,
+  .custom-date::-webkit-inner-spin-button {
+  display: none;
+}
+
+.custom-date::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+}
+
+}
