@@ -1,5 +1,8 @@
 import React from 'react'
+import { useForm } from 'react-hook-form';
 import Modal from 'react-modal'
+import FormField from './FormField';
+
 
 const customStyles = {
     overlay: {
@@ -20,6 +23,7 @@ Modal.setAppElement("#root");
 
 
 const TransactionBtn = () => {
+    const {register, handleSubmit, formState: {errors}, } = useForm();
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     
@@ -55,6 +59,10 @@ const handleDateChange = (event) => {
     setSelectedDate(formatDate(event.target.value));
 };
 
+const onSubmit = async (data) => {
+    console.log(data);
+}
+
 return (
     <div>
         <button onClick={openModal} className='text-sm p-4 rounded-md text-white font-bold bg-black'>+Add New Transaction</button>
@@ -68,18 +76,26 @@ return (
         >
             <div className='px-2 pb-0 flex flex-col gap-2 '>
                 <h1 className='text-black text-lg font-bold '>Add New Transaction</h1>
-                    <form action="" className='flex flex-col gap-3'>
+                    <form action="" className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
                         <div className='flex flex-col gap-1 '>
                             <label htmlFor=" " className='text-grey-500 text-sm'>Transaction Name</label>
-                            <input type="text" placeholder='e.g Urban services Hub' className='w-[100%] border px-4 py-2 rounded-lg border-gray-500 ' />
+                            <FormField
+                                text="text"
+                                placeholder="e.g Urban services Hub"
+                                className="w-[100%] border px-4 py-2 rounded-lg border-gray-500 "
+                                name="transactionName"
+                                error={errors.transactionName}
+                                valueAsNumber={false}
+                                register={register}
+                            />
+                            {/* <input type="text" placeholder='e.g Urban services Hub' className='w-[100%] border px-4 py-2 rounded-lg border-gray-500 ' /> */}
                             </div>
                             
                             <div className='flex flex-col gap-1 mt-5 relative '>
                                 <label htmlFor="" className='text-grey-500 text-sm'>Transaction Date</label>
                                 
                                 <div className=' flex gap-2 items-center justify-between cursor-pointer bg-beige-100 px-4 py-2 rounded-lg '>
-                    
-                                 <input type="date" placeholder='' className='custom-date ml-[90%] px-4 py-2  bg-beige-100' onChange={handleDateChange} />
+                                 <input type="date" placeholder='' className='custom-date ml-[90%] px-4 py-2  bg-beige-100' onChange={handleDateChange}/>
                 
                                 </div>
                                 {!selectedDate && <p className='text-grey-500 text-sm absolute top-10 left-4 '>Pick a date</p>}
@@ -104,7 +120,16 @@ return (
 
                             <div className='flex flex-col gap-1 mt-1'>
                                 <label htmlFor="" className='text-grey-500 text-sm'>Amount</label>
-                                <input type="number" placeholder='e.g $1000' className='w-[100%] border px-4 py-2 rounded-lg border-gray-500 ' />
+                                <FormField
+                                    text="number"
+                                    placeholder="e.g $1000"
+                                    className="w-[100%] border px-4 py-2 rounded-lg border-gray-500 "
+                                    name="amount"
+                                    error={errors.amount}
+                                    valueAsNumber={true}
+                                    register={register}
+                                />
+                                {/* <input type="number" placeholder='e.g $1000' className='w-[100%] border px-4 py-2 rounded-lg border-gray-500 ' /> */}
                             </div>
 
                             <div className='flex gap-4 mt-1 items-center'>
